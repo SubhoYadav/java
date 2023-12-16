@@ -10,6 +10,8 @@ public class ArrayLists {
         for (int i=0; i<=5; i++) {
             arrayList.add(i);
         }
+        System.out.println("Array List element at 2" + arrayList.get(2));
+        System.out.println("Size of array list " + arrayList.size());
         // Enhanced for loop
         for (Integer n : arrayList) {
             System.out.println(n);
