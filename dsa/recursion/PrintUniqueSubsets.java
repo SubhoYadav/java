@@ -14,6 +14,10 @@ public class PrintUniqueSubsets {
     System.out.println(hm.containsValue(300));
     System.out.println(hm.containsValue(3000));
     System.out.println(hm.keySet());
+
+    for(Map.Entry<String, Integer> entry : hm.entrySet()) {
+      System.out.println("Key = " + entry.getKey() + "\n" + "Value = " + entry.getValue());
+    }
   }
 
   static void solve(String inpt, String otpt, Map<String, Integer> mp) {
@@ -26,10 +30,10 @@ public class PrintUniqueSubsets {
     solve(inpt.substring(1), otpt, mp);
   }
   public static void main(String args[]) {
-    // mapOperations();
-    Map<String, Integer> mp = new HashMap<String, Integer>();
-    String inpt = "aab";
-    solve(inpt, "", mp);
-    System.out.println("Result = " + mp.keySet());
+    mapOperations();
+    // Map<String, Integer> mp = new HashMap<String, Integer>();
+    // String inpt = "aab";
+    // solve(inpt, "", mp);
+    // System.out.println("Result = " + mp.keySet());
   }
 }
