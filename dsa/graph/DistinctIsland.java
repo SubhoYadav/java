@@ -3,9 +3,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DistinctIsland {
-    static void dfs(int[][] grid, boolean[][] visited, int sr, int sc, int rows, int cols, int br, int bc, ArrayList<String> arrayList) {
+    static void dfs(int[][] grid, boolean[][] visited, int sr, int sc, int br, int bc, int rows, int cols, ArrayList<String> arrayList) {
         visited[sr][sc] = true;
-        System.out.println("AL " + " " + Math.abs(sr - br) + "" + Math.abs(sc - bc));
         arrayList.add(String.format("(%d, %d)", Math.abs(sr - br), Math.abs(sc - bc)));
         
         int[] delRow = {-1, 1,0,0};
@@ -34,6 +33,13 @@ public class DistinctIsland {
 
         boolean visited[][] = new boolean[rows][cols];
         Set<String> set = new HashSet<>();
+
+        // for (int i=0; i<visited.length; i++) {
+        //     for (int j=0; j<visited[i].length; j++) {
+        //         System.out.println(visited[i][j] + " ");
+        //     }
+        //     System.out.println();
+        // }
 
         for (int i=0; i<rows; i++) {
             for (int j=0; j<cols; j++) {
