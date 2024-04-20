@@ -2,19 +2,23 @@ import java.util.ArrayList;
 
 public class BipartiteDFS {
 
-  static boolean check(int start, ArrayList<ArrayList<Integer>> adj, int[] color, int parentColor) {
+  static boolean dfs(int start, ArrayList<ArrayList<Integer>> adj, int[] color, int parentColor) {
     color[start] = 1 - parentColor;
 
     for (int i: adj.get(start)) {
       if (color[i] == -1) {
-        if (check(i, adj, color, color[start]) == false) return false;
-
-        else if (color[i] == parentColor) return false;
+        if (dfs(i, adj, color, color[start]) == false){
+          return false;
+        }
+      }
+      else if (color[i] == parentColor) {
+        return false;
       }
     }
     return true;
   }
-  public static void main(String args[]) {
+
+  static boolean detect() {
     int BV = 6, NBV = 8;
     ArrayList<ArrayList<Integer>> bipartiteGraph = new ArrayList<ArrayList<Integer>>();
     ArrayList<ArrayList<Integer>> nonBipartiteGraph = new ArrayList<ArrayList<Integer>>();
@@ -69,8 +73,6 @@ public class BipartiteDFS {
 
     bipartiteGraph.get(6).add(4);
     
-    int isBipartite = -1;
-
     // Bipartite check
     int color[] = new int[BV + 1];
     for (int i=1; i<BV+1; i++) {
@@ -78,9 +80,8 @@ public class BipartiteDFS {
     }
     for (int i=1; i<BV+1; i++) {
       if (color[i] == -1) {
-        if (!check(i, bipartiteGraph, color, color[i])) {
-          isBipartite = 0;
-          break;
+        if (!dfs(i, bipartiteGraph, color, color[i])) {
+          return false;
         }
       }
     }
@@ -98,12 +99,10 @@ public class BipartiteDFS {
     //     }
     //   }
     // }
-
-    if (isBipartite == 0) {
-      System.out.println("Not a Bipartite graph");
-    }
-    else {
-      System.out.println("Bipartite graph");
-    }
+    return true;
+  }
+  public static void main(String args[]) {
+    boolean result = detect();
+    System.out.println("Result = " + result);
   } 
 }
