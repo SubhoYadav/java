@@ -4,10 +4,12 @@ public class MaxConsecutiveOne {
 
     for(int i=0; i<n; i++) {
       if (arr[i] == 1) {
+        // keep replacing the max until, u are getting consecutive ones
         count ++;
         if (count > max) max = count;
       }
       else {
+        // Once the seq breaks, reset the count of consecutive ones to 0
         count = 0;
       }
     }

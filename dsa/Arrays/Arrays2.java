@@ -1,4 +1,5 @@
 public class Arrays2 {
+  // Left rotate
   static void rotateArrayBetter(int[] arr, int n, int steps) {
     // If we rotate an array by n steps, where n = size of the array, we get the original array back
     steps = steps % n;

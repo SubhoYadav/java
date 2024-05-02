@@ -17,12 +17,13 @@ public class MoveZeroesToTheEnd {
     int j = -1;
     for(int i=0;i<arr.length;i++) {
       if (arr[i] == 0) {
-        j=i;
+        j=i; // finding the first occurence of 0
         break;
       }
     }  
 
     if (j == -1) {
+      // If j=-1, it means that the array does not contain 0 return with an appropriate message
       System.out.println("No zeroes to move at the end");
       utilPrintArray(arr, n);
       return;
@@ -30,6 +31,7 @@ public class MoveZeroesToTheEnd {
 
     for(int i=j+1; i<n;i++) {
       if (arr[i]!=0) {
+        // swap the non zero number with the first occurence of 0, pointed by 'j' and increment j, in this way j will always be pointing to the first occurence of zero
         arr = utilSwap(arr, i, j);
         j++;
       }

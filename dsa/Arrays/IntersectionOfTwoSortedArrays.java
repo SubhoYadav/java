@@ -20,12 +20,15 @@ public class IntersectionOfTwoSortedArrays {
 
     for (int i=0; i<largerArrLength; i++) {
       for (int j = 0; j<smallerArrLength; j++) {
+        // for every element in the larger array, see if there is a corressponding element in the smaller array or not and the element must not been taken into account previously, take the help of the visited array
+        // Actually! u can event start with the smaller array
         if (a2[j] == a1[i] && visited[j] != 1) {
           result.add(a1[i]);
           visited[j] = 1;
-          break;
+          break; // break out and pick the next element
         }
 
+        // If at any point the element in the second array, is greater than the element we are trying to intersect with, break off, as the array is sorted and u will never find any such elements further
         if (a2[j] > a1[i]) break; 
       }
     }
@@ -37,13 +40,14 @@ public class IntersectionOfTwoSortedArrays {
     ArrayList<Integer> result = new ArrayList<Integer>();
     while(i<n1 && j<n2) {
       if(a1[i] < a2[j]) {
-        i++;
+        i++; // need to find a bigger number from a1 to match with a2 so increment a1 pointer
       }
       else if(a2[j] < a1[i]) {
-        j++;
+        j++; // need to find a bigger number from a2 to match with a1 so increment a2 pointer
       }
       else {
-        result.add(a1[i]);
+        // whenever u get a match store it into the result and increment both the pointers
+        result.add(a1[i]); 
         i++;
         j++;
         // HANDLE THE EQUALITY CASE IN ELSE BLOCK
