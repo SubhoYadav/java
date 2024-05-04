@@ -18,7 +18,7 @@ public class FindNoThatAppearsOnce {
   }
 
   static int solveOptimal(int[] arr, int n) {
-    // Leveraging the XOR propeerty of the numbers
+    // Leveraging the XOR property of the numbers
     int ans = 0;
     for(int i=0;i<n;i++) {
       ans = ans ^ arr[i];
