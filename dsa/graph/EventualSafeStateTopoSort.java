@@ -46,9 +46,8 @@ public class EventualSafeStateTopoSort {
         }
       }
     }
-    // al.sort
     // Collections.sort(safeNodes, Collections.reverseOrder()); => sorts in descending order
-    Collections.sort(safeNodes, Collections.reverseOrder()); // sorts in ascending order
+    Collections.sort(safeNodes); // sorts in ascending order
     return safeNodes;
   }
   public static void main(String[] args) {

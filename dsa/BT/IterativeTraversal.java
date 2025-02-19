@@ -7,58 +7,115 @@ public class IterativeTraversal {
     Node right;
     Node(int key) {
       data = key;
+      left = null;
+      right = null;
     }
   }
+  static ArrayList<Integer> iterativePostOrderTraversal (Node root) {
 
-  static void iterativePreorderTraversal(Node root) {
+    ArrayList<Integer> result = new ArrayList<Integer>();
     Stack<Node> stck = new Stack<Node>();
     stck.push(root);
-    ArrayList<Integer> ans = new ArrayList<Integer>();
+    Map<Integer, Boolean> visited = new HashMap<Integer, Boolean>();
 
     while(!stck.isEmpty()) {
-      Node poppedNode = stck.pop();
-      // push the right node first because left has to come first and stack is a LIFO DS
-      if (poppedNode.right != null) stck.push(poppedNode.right);
-      if(poppedNode.left != null) stck.push(poppedNode.left);
-
-      ans.add(poppedNode.data);
-    }
-    System.out.println("Pre-order traversal " + ans);
-  }
-
-  static void iterativeInorderTraversal(Node root) {
-    Stack<Node> stck = new Stack<Node>();
-    ArrayList<Integer> ans = new ArrayList<Integer>();
-
-    stck.push(root);
-
-    while(!stck.isEmpty()) {
-      Node topNode = stck.peek();
-      if (topNode.left != null) stck.push(topNode.left);
+      Node stackTop = stck.peek();
+      // System.out.println("stcaktop " + " " + stackTop.data + " " + stackTop.right.data);
       
+
+      if (stackTop.right != null && visited.get(stackTop.right.data) == null) {
+        stck.push(stackTop.right);
+      }
+
+
+      if (stackTop.left!= null && visited.get(stackTop.left.data) == null) {
+        stck.push(stackTop.left);
+      }
+
+      if (visited.get(stackTop.data) != null) {
+        // we are visiting the element twice so pop it off
+        result.add(stackTop.data);
+        stck.pop();
+      }
       else {
-        Node poppedNode = stck.pop();
-        // store the  result
-        ans.add(poppedNode.data);
-        if (poppedNode.right != null) stck.push(poppedNode.right);
-        else {
-          Node poppNode = 
-        }
+        visited.put(stackTop.data, true);
       }
     }
+
+    return result;
+
   }
+   
+     
+  static ArrayList<Integer> iterativePostOrderTraversalMap (Node root) {
 
+    ArrayList<Integer> result = new ArrayList<Integer>();
+    Stack<Node> stck = new Stack<Node>();
+    stck.push(root);
+    Stack<Boolean> visited = new Stack<Boolean>();
+    visited.push(false);
+
+    while(!stck.isEmpty()) {
+      Node stackTop = stck.pop();
+      Boolean isStackTopVisited = visited.pop();
+      
+      if (isStackTopVisited == true) {
+        result.add(stackTop.data);
+      }
+
+      else {
+        stck.push(stackTop);
+        visited.push(true);
+        
+        if (stackTop.right != null) {
+          stck.push(stackTop.right);
+          visited.push(false);
+        }
+
+
+        if (stackTop.left != null) {
+          stck.push(stackTop.left);
+          visited.push(false); 
+        }
+      
+      }
+    }
+
+    return result;
+
+  }
+  
+
+  static ArrayList<Integer> iterativeInorderTraversal (Node root) {
+    ArrayList<Integer> ans = new ArrayList<Integer>();
+    Stack<Node> stck = new Stack<Node>();
+    Node curr = root;
+
+    while (!stck.isEmpty() || curr != null) {
+      while (curr != null) {
+        stck.push(curr);
+        curr = curr.left;
+      } 
+
+      curr = stck.pop();
+      ans.add(curr.data);
+      curr = curr.right;
+    }
+
+    return ans;
+  }
   public static void main(String args[]) {
-    Node root = new Node(1);
-    root.left = new Node(2);
-    root.right = new Node(7);
+    Node root = new Node(5);
+    root.left = new Node(1);
+    root.right = new Node(4);
 
-    root.left.left = new Node(3);
-    root.left.right = new Node(4);
 
-    root.left.right.left = new Node(5);
-    root.left.right.right = new Node(6);
+    root.right.left = new Node(2);
+    root.right.right = new Node(3);
 
-    iterativePreorderTraversal(root);
+    // System.out.println(iterativePostOrderTraversal(root));
+
+    
+    System.out.println(iterativeInorderTraversal(root));
   }
 }

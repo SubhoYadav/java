@@ -8,6 +8,7 @@ public class BTImplementation {
 
     Node(int key) {
       data = key;
+      left = right = null;
     }
   }
   public static void main(String args[]) {
